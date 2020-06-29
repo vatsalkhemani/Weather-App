@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,9 +104,11 @@ public class DateFragment extends Fragment {
                             googleMap.getUiSettings().setAllGesturesEnabled(true);
 
                             // MAKE THIS WHATEVER YOU WANT
-                            LatLng latLng = new LatLng(23, 34);
+                            LatLng sydney = new LatLng(-34, 151);
+                            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-                            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15.0f).build();
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(15.0f).build();
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
                             googleMap.moveCamera(cameraUpdate);
 
