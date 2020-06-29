@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +31,44 @@ public class CurrentFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    String mName;
+    String mLatitude;
+    String mLongitude;
 
 
     public CurrentFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view=inflater.inflate(R.layout.fragment_current, container, false);
+        mName=getArguments().getString("name");
+      mLatitude=getArguments().getString("latitude");
+        mLongitude=getArguments().getString("longitude");
+        TextView textView=(TextView)view.findViewById(R.id.test);
+        textView.setText(mName);
+        TextView textView2=(TextView)view.findViewById(R.id.lat);
+        textView2.setText(mLatitude);
+        TextView textView3=(TextView)view.findViewById(R.id.lon);
+        textView3.setText(mLongitude);
+
+
+        // latEditText.setText(mLatitude);
+        //lonEditText.setText(mLongitude);
+
+
+         Toast.makeText(getContext(), "Latitude="+mLatitude+"\n"+"Longitude="+mLongitude+"\n"+"name:"+mName,Toast.LENGTH_SHORT).show();
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     /**
@@ -62,16 +99,7 @@ public class CurrentFragment extends Fragment {
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-      String mName=getArguments().getString("name");
-        String mLatitude=getArguments().getString("latitude");
-        String mLongitude=getArguments().getString("longitude");
 
-        Toast.makeText(getContext(), "Latitude="+mLatitude+"\n"+"Longitude="+mLongitude+"\n"+"name:"+mName,Toast.LENGTH_SHORT).show();
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_current, container, false);
-    }
+
 }

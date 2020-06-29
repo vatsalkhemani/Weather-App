@@ -20,13 +20,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:               "
+            android:text="Name:"
             android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
-                android:id="@+id/username"/>
+                android:textSize="15dp"
+                android:id="@+id/test"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,12 +36,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Latitude:             "
+                android:text="Latitude:"
                 android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
+                android:textSize="15dp"
                 android:id="@+id/lat"/>
         </LinearLayout>
         <LinearLayout
@@ -50,12 +52,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Longitude:           "
+                android:text="Longitude:"
                 android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
+                android:textSize="15dp"
                 android:id="@+id/lon"/>
         </LinearLayout>
         <LinearLayout
@@ -65,12 +68,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="City:                   "
+                android:text="City:"
                 android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
+                android:textSize="15dp"
                 android:id="@+id/city"/>
         </LinearLayout>
         <LinearLayout
@@ -80,12 +84,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature:   "
+                android:text="Temperature:"
                 android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
+                android:textSize="15dp"
                 android:id="@+id/temp"/>
         </LinearLayout>
         <LinearLayout
@@ -95,12 +100,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity     :     "
+                android:text="Humidity:"
                 android:textSize="15dp"></TextView>
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NA"
+                android:textSize="15dp"
                 android:id="@+id/humidity"/>
         </LinearLayout>
 
