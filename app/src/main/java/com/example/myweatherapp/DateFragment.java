@@ -1,19 +1,23 @@
 package com.example.myweatherapp;
 
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,6 +45,7 @@ public class DateFragment extends Fragment {
     private String mParam2;
 
     DatePicker picker;
+    String spinnerSelected;
 
     StringBuilder builder;
     private SupportMapFragment mSupportMapFragment;
@@ -87,6 +92,7 @@ public class DateFragment extends Fragment {
 
 
 
+
             mSupportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapwhere);
             if (mSupportMapFragment == null) {
                 FragmentManager fragmentManager = getFragmentManager();
@@ -118,18 +124,38 @@ public class DateFragment extends Fragment {
                 });
             }
 
-
+            spinnerSelected="";
         String [] values =
                 {"Delhi","Mumbai","Noida"};
         Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+
         spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                String text= (String) item;
+                Log.i("spinner:",text);
+                spinnerSelected=text;
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+
 
 
         textview1=(TextView)v.findViewById(R.id.textView1);
         picker=(DatePicker)v.findViewById(R.id.datePicker);
         displayDate=(Button)v.findViewById(R.id.button1);
+
+
+
+        Toast.makeText(getContext(),spinnerSelected,Toast.LENGTH_LONG).show();
 
         textview1.setText("Current Date: "+getCurrentDate());
 
