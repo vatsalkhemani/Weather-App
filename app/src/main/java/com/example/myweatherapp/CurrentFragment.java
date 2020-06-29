@@ -12,7 +12,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.jar.Manifest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +46,7 @@ public class CurrentFragment extends Fragment {
     String mName;
     String mLatitude;
     String mLongitude;
+    TextView textView4,textView5,textView6;
 
 
     public CurrentFragment() {
@@ -48,12 +61,53 @@ public class CurrentFragment extends Fragment {
         mName=getArguments().getString("name");
       mLatitude=getArguments().getString("latitude");
         mLongitude=getArguments().getString("longitude");
+
+        RequestQueue queue= Volley.newRequestQueue(getActivity().getApplicationContext());
+
         TextView textView=(TextView)view.findViewById(R.id.test);
         textView.setText(mName);
         TextView textView2=(TextView)view.findViewById(R.id.lat);
         textView2.setText(mLatitude);
         TextView textView3=(TextView)view.findViewById(R.id.lon);
         textView3.setText(mLongitude);
+         textView4=(TextView)view.findViewById(R.id.city);
+        textView5=(TextView)view.findViewById(R.id.temp);
+         textView6=(TextView)view.findViewById(R.id.humidity);
+
+
+
+        String url="http://api.openweathermap.org/data/2.5/weather?lat="+mLatitude+"&lon="+mLongitude+"&appid=873069d275561f80502ee997b550483d";
+        Log.i("url",url);
+        JsonObjectRequest jor=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject main_object=response.getJSONObject("main");
+                    JSONArray array =response.getJSONArray("weather");
+                    JSONObject object=array.getJSONObject(0);
+                    String temp= String.valueOf(main_object.getDouble("temp"));
+                    String description = object.getString("description");
+                    String city=response.getString("name");
+
+
+                    textView4.setText(city);
+                    textView5.setText(temp);
+                    textView6.setText(description);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }
+        );
+
+        queue.add(jor);
 
 
         // latEditText.setText(mLatitude);
@@ -65,9 +119,14 @@ public class CurrentFragment extends Fragment {
         return view;
     }
 
+    private void findWeather() {
+
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        findWeather();
 
     }
 

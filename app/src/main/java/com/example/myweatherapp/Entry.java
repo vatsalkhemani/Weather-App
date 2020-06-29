@@ -95,6 +95,7 @@ public class Entry extends AppCompatActivity {
                 intent.putExtra("name",mName.getText().toString());
 
                 startActivity(intent);
+
             }
         });
     }
