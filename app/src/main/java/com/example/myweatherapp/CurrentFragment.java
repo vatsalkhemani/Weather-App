@@ -67,7 +67,10 @@ public class CurrentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
       String mName=getArguments().getString("name");
-      Toast.makeText(getContext(),mName,Toast.LENGTH_SHORT).show();
+        String mLatitude=getArguments().getString("latitude");
+        String mLongitude=getArguments().getString("longitude");
+
+        Toast.makeText(getContext(), "Latitude="+mLatitude+"\n"+"Longitude="+mLongitude+"\n"+"name:"+mName,Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_current, container, false);
     }
