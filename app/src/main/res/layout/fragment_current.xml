@@ -25,8 +25,38 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="NA"
                 android:id="@+id/username"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Latitude:             "
+                android:textSize="15dp"></TextView>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:id="@+id/lat"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Longitude:           "
+                android:textSize="15dp"></TextView>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:id="@+id/lon"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,7 +70,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="City"
+                android:text="NA"
                 android:id="@+id/city"/>
         </LinearLayout>
         <LinearLayout
@@ -55,7 +85,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temp"
+                android:text="NA"
                 android:id="@+id/temp"/>
         </LinearLayout>
         <LinearLayout
@@ -70,7 +100,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity"
+                android:text="NA"
                 android:id="@+id/humidity"/>
         </LinearLayout>
 

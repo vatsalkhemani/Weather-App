@@ -19,6 +19,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    String mLatitude;
+    String mLongitude;
+    String mName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,18 +29,24 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
 
-        String mLatitude=intent.getStringExtra("latitude");
-        String mLongitude=intent.getStringExtra("longitude");
-        String mName=intent.getStringExtra("name");
+        mLatitude=intent.getStringExtra("latitude");
+        mLongitude=intent.getStringExtra("longitude");
+        mName=intent.getStringExtra("name");
+
+        Bundle bundle=new Bundle();
+        bundle.putString("latitude",mLatitude);
+        bundle.putString("longitude",mLongitude);
+        bundle.putString("name",mName);
 
 
-        Toast.makeText(getApplicationContext(), "Latitude="+mLatitude+"\n"+"Longitude="+mLongitude+"\n"+"name:"+mName,Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getApplicationContext(), "Latitude="+mLatitude+"\n"+"Longitude="+mLongitude+"\n"+"name:"+mName,Toast.LENGTH_SHORT).show();
 
 
         final TabLayout tabLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new CurrentFragment(), "Current");
+        Fragment cur=new CurrentFragment();    cur.setArguments(bundle);    viewPagerAdapter.addFragment(cur, "Current");
+        //viewPagerAdapter.addFragment(new CurrentFragment(),"Current");
         viewPagerAdapter.addFragment(new DateFragment(), "Date");
         viewPagerAdapter.addFragment(new ForecastFragment(), "Forecast");
         viewPagerAdapter.addFragment(new SettingFragment(), "Settings");
