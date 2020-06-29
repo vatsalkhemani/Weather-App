@@ -3,10 +3,25 @@ package com.example.myweatherapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +39,12 @@ public class DateFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    DatePicker picker;
+
+    StringBuilder builder;
+    private SupportMapFragment mSupportMapFragment;
+    Button displayDate;
+    TextView textview1;
     public DateFragment() {
         // Required empty public constructor
     }
@@ -58,7 +79,73 @@ public class DateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_date, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_date, container, false);
+
+
+
+
+
+            mSupportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapwhere);
+            if (mSupportMapFragment == null) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                mSupportMapFragment = SupportMapFragment.newInstance();
+                fragmentTransaction.replace(R.id.mapwhere, mSupportMapFragment).commit();
+            }
+
+            if (mSupportMapFragment != null) {
+                mSupportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                    @Override
+                    public void onMapReady(GoogleMap googleMap) {
+                        if (googleMap != null) {
+
+                            googleMap.getUiSettings().setAllGesturesEnabled(true);
+
+                            // MAKE THIS WHATEVER YOU WANT
+                            LatLng latLng = new LatLng(23, 34);
+
+                            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15.0f).build();
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                            googleMap.moveCamera(cameraUpdate);
+
+                        }
+
+                    }
+                });
+            }
+
+
+        String [] values =
+                {"Delhi","Mumbai","Noida"};
+        Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, values);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(adapter);
+
+
+        textview1=(TextView)v.findViewById(R.id.textView1);
+        picker=(DatePicker)v.findViewById(R.id.datePicker);
+        displayDate=(Button)v.findViewById(R.id.button1);
+
+        textview1.setText("Current Date: "+getCurrentDate());
+
+        displayDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textview1.setText("Change Date: "+getCurrentDate());
+
+            }
+        });
+
+
+        return v;
     }
-}
+    public String getCurrentDate() {
+        builder = new StringBuilder();
+        builder.append((picker.getMonth() + 1) + "/");
+        builder.append(picker.getDayOfMonth() + "/");
+        builder.append(picker.getYear());
+        return builder.toString();
+    }
+    }
